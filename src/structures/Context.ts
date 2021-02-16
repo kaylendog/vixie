@@ -22,7 +22,7 @@ export class Context {
         return this.message.channel;
     }
 
-    get guild(): Guild | undefined {
+    get guild(): Guild | null {
         return this.message.guild;
     }
 
