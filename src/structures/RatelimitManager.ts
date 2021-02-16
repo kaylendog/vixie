@@ -46,7 +46,7 @@ export class RatelimitManager {
             this.executions.set(ctx.author.id, { count: 0, timestamp: 0 });
         }
 
-        const execution = this.executions.get(ctx.author.id);
+        const execution = this.executions.get(ctx.author.id)!;
         execution.count += 1;
 
         if (execution.count < this.options.maxCount) {
@@ -65,7 +65,7 @@ export class RatelimitManager {
 
         // check timestamp
         const timestamp = this.executions.get(ctx.author.id);
-        if (executions < Date.now()) {
+        if (timestamp || 0 < Date.now()) {
             this.userDidExecute(ctx);
             return true;
         }
