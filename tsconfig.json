@@ -4,12 +4,13 @@
         "module": "CommonJS",
         "moduleResolution": "Node",
         "strict": true,
-        "skipLibCheck": true,
+
         "outDir": "./dist",
+        "declaration": true,
 
-        "declaration": false,
+        "skipLibCheck": true,
+
         "esModuleInterop": true,
-
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true
     },
