@@ -41,4 +41,6 @@ export class CommandNode {
  * @param command
  */
 export const buildNodeTree = (command: Command): CommandNode =>
-    new CommandNode(command.options.name).addNode(...command.subcommands.map((v) => buildNodeTree(v)));
+    new CommandNode(command.options.name).addNode(
+        ...command.subcommands.map((v) => buildNodeTree(v))
+    );

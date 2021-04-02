@@ -1,6 +1,14 @@
-import { Args } from "../syntax/Args";
+import { Context } from "../structures/Context";
 
-export interface SyntaxMeta {
+export interface ModuleCommandMeta {
     target: Function;
-    value: Args;
+    value: (context: Context) => any;
 }
+
+/**
+ * Represents a module command.
+ * @returns
+ */
+export const ModuleCommand = (): MethodDecorator => {
+    return (target, key, descriptor) => {};
+};
