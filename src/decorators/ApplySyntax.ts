@@ -9,15 +9,15 @@ export function ApplySyntax(...args: Argument<unknown>[]): ClassDecorator;
  * Apply a Syntax to this command.
  */
 export function ApplySyntax(
-    argsOrFirstArgument: Args | Argument<unknown>,
-    ...args: Argument<unknown>[]
+	argsOrFirstArgument: Args | Argument<unknown>,
+	...args: Argument<unknown>[]
 ): ClassDecorator {
-    return (target) => {
-        if (argsOrFirstArgument instanceof Args) {
-            container.commandSyntaxes.push({ target, value: argsOrFirstArgument });
-        } else {
-            const completeArgs = [argsOrFirstArgument, ...args];
-            container.commandSyntaxes.push({ target, value: Args.of(completeArgs) });
-        }
-    };
+	return (target) => {
+		if (argsOrFirstArgument instanceof Args) {
+			container.commandSyntaxes.push({ target, value: argsOrFirstArgument });
+		} else {
+			const completeArgs = [argsOrFirstArgument, ...args];
+			container.commandSyntaxes.push({ target, value: Args.of(completeArgs) });
+		}
+	};
 }

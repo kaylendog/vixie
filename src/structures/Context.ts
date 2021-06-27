@@ -1,4 +1,6 @@
-import { Guild, Message } from "discord.js";
+import {
+    APIMessageContentResolvable, Guild, Message, MessageAdditions, MessageOptions
+} from "discord.js";
 
 import { ContextEmbed } from "./ContextEmbed";
 
@@ -6,40 +8,52 @@ import { ContextEmbed } from "./ContextEmbed";
  * Represents the context in which a command was run.
  */
 export class Context {
-    constructor(readonly message: Message) {}
+	constructor(message: Message) {
+		this._message = message;
+	}
 
-    /**
-     * The user who ran the command.
-     */
-    get author() {
-        return this.message.author;
-    }
+	// workaround for needing to specify types on cloned methods
+	private _message: Message;
 
-    /**
-     * The channel the command was executed in.
-     */
-    get channel() {
-        return this.message.channel;
-    }
+	/**
+	 * The message this content represents.
+	 */
+	get message(): Message {
+		return this._message;
+	}
 
-    get guild(): Guild | null {
-        return this.message.guild;
-    }
+	/**
+	 * The user who ran the command.
+	 */
+	get author() {
+		return this._message.author;
+	}
 
-    /**
-     * Reply to this message.
-     */
-    reply = this.message.reply;
+	/**
+	 * The channel the command was executed in.
+	 */
+	get channel() {
+		return this._message.channel;
+	}
 
-    /**
-     * Send a message to the channel this context was created in.
-     */
-    send = this.channel.send.bind(this.channel);
+	get guild(): Guild | null {
+		return this._message.guild;
+	}
 
-    /**
-     * Create a new context embed.
-     */
-    embed() {
-        return new ContextEmbed(this);
-    }
+	/**
+	 * Reply to this message.
+	 */
+	reply = this.message.reply;
+
+	/**
+	 * Send a message to the channel this context was created in.
+	 */
+	send = this.channel.send.bind(this.channel);
+
+	/**
+	 * Create a new context embed.
+	 */
+	embed() {
+		return new ContextEmbed(this);
+	}
 }

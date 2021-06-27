@@ -1,18 +1,22 @@
 {
-    "compilerOptions": {
-        "target": "ESNext",
-        "module": "CommonJS",
-        "moduleResolution": "Node",
-        "strict": true,
+	"compilerOptions": {
+		"target": "ESNext",
+		"module": "CommonJS",
+		"moduleResolution": "Node",
+		"strict": true,
+		"alwaysStrict": true,
 
-        "outDir": "./dist",
-        "declaration": true,
+		"outDir": "./dist",
+		"declaration": true,
 
-        "skipLibCheck": true,
+		"skipLibCheck": true,
 
-        "esModuleInterop": true,
-        "experimentalDecorators": true,
-        "emitDecoratorMetadata": true
-    },
-    "include": ["src", "tests"]
+		"esModuleInterop": true,
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true,
+
+		"composite": true,
+		"rootDir": "src"
+	},
+	"include": ["src", "tests"]
 }

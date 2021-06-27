@@ -1,8 +1,9 @@
 import { Context } from "../structures/Context";
+import { Args } from "../syntax/Args";
 
 export interface SyntaxMeta {
 	target: Function;
-	value: (context: Context) => any;
+	value: Args;
 }
 
 /**
