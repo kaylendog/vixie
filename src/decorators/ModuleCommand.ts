@@ -15,7 +15,8 @@ export const ModuleCommand = (opts: CommandOptions): MethodDecorator => {
 		if (descriptor.value === undefined) {
 			throw new Error("Descriptor value is undefined!");
 		}
-		class DecoratorCommand extends Command {
+		// declare a new internal class
+		class InternalDecoratedCommand extends Command {
 			constructor(client: VixieClient) {
 				super(client, opts);
 			}
@@ -24,6 +25,10 @@ export const ModuleCommand = (opts: CommandOptions): MethodDecorator => {
 				((descriptor.value! as unknown) as (ctx: Context, ...args: any[]) => unknown).call(target, ctx, ...args);
 			}
 		}
-		container.moduleCommands.push({ target: target.constructor as Constructor<Module>, command: DecoratorCommand });
+
+		container.moduleCommands.push({
+			target: target.constructor as Constructor<Module>,
+			command: InternalDecoratedCommand,
+		});
 	};
 };

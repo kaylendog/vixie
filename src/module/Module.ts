@@ -1,5 +1,5 @@
 import { Command } from "../structures/Command";
-import { VixieImplementation } from "../util/types";
+import { Constructor, VixieImplementation } from "../util/types";
 import { VixieClient } from "../VixieClient";
 
 interface ModuleOptions {
@@ -11,6 +11,16 @@ interface ModuleOptions {
  */
 export abstract class Module {
 	constructor(readonly client: VixieClient, readonly options: ModuleOptions) {}
+
+	lookupModule<T extends Module>(constructor: Constructor<T>) {
+		const module = this.client.modules.find((module) => module.constructor === constructor);
+		// if no module exists.
+		if (module === undefined) {
+			throw new Error("Failed to resolve module " + constructor.name);
+		}
+		// cast and return
+		return module as T;
+	}
 
 	/**
 	 * Register the target commands on this module.

@@ -27,7 +27,7 @@ const DEFAULT_VIXIE_OPTIONS: VixieOptions = {
 export class VixieClient extends Client {
 	readonly opts: VixieOptions;
 
-	private modules = new Collection<string, Module>();
+	public modules = new Collection<string, Module>();
 	private commands = new Collection<string, Command>();
 	private nodeTree = new Collection<string, CommandNode>();
 	private aliases = new Collection<string, Command>();
